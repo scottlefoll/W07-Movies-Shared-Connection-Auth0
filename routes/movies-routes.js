@@ -150,7 +150,7 @@ routes.get('/director/:name', [
             }
     });
 
-routes.post('/create', validateMovieFields, async (req, res, next) => {
+routes.post('/create',  checkJwt, validateMovieFields, async (req, res, next) => {
 // routes.post('/create', validateMovieFields, async (req, res, next) => {
     console.log('in /movies/create route');
     const result = validationResult(req);
@@ -164,7 +164,7 @@ routes.post('/create', validateMovieFields, async (req, res, next) => {
     }
 });
 
-routes.put('/update/:id', validateMovieParamId, validateMovieFields, async (req, res, next) => {
+routes.put('/update/:id',  checkJwt, validateMovieParamId, validateMovieFields, async (req, res, next) => {
     console.log('in /movies/update/:id route');
     const result = validationResult(req);
     if (!result.isEmpty()) {
@@ -178,7 +178,7 @@ routes.put('/update/:id', validateMovieParamId, validateMovieFields, async (req,
   });
 
 
-routes.delete('/delete/:id', validateMovieParamId, async (req, res, next) => {
+routes.delete('/delete/:id',  checkJwt, validateMovieParamId, async (req, res, next) => {
     console.log('in /movies/delete/:id route');
     const result = validationResult(req);
     if (!result.isEmpty()) {
