@@ -15,11 +15,7 @@ app.use(session({
     resave: false,
     saveUninitialized: false
 }));
-app.use(authMiddleware.initialize());
-app.use(authMiddleware.session());
-
-// Protect your routes with the OAuth 2.0 middleware
-app.use('/api/movies', authMiddleware.authenticate('oauth2'));
+app.use(passport.initialize());
 app.use(bodyParser.json());
 // const router = express.Router();
 // router.use('/', require('./swagger'));
@@ -36,10 +32,7 @@ const jwtCheck = auth({
     audience: 'https://cse341-spring23-mongoose-shared.onrender.com/',
     issuerBaseURL: 'https://dev-4f411zuqwxmob8zg.us.auth0.com/',
     tokenSigningAlg: 'RS256'
-});
-
-// enforce on all endpoints
-app.use(jwtCheck);
+  });
 
 app.use('/api/movies', routes);
 const swaggerUi = require('swagger-ui-express');
